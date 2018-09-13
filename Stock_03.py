@@ -2,8 +2,6 @@
 # By tostq <tostq216@163.com>
 # Reference to hmmlearn.examples.plot_hmm_stock_analysis.py
 # 博客: blog.csdn.net/tostq
-import datetime
-
 import numpy as np
 import pandas as pd
 from matplotlib import cm, pyplot as plt
