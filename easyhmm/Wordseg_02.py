@@ -3,7 +3,7 @@
 # 博客: blog.csdn.net/tostq
 import numpy as np
 import hmm
-
+#todo: saving and loading HMM
 state_M = 4
 word_N = 0
 
