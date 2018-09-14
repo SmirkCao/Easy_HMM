@@ -17,3 +17,9 @@ A easy HMM program written with Python, including the full codes of training, pr
 参见个人博客：[http://blog.csdn.net/tostq/article/details/70846702](http://blog.csdn.net/tostq/article/details/70846702 "hmm")
 
 里面具体剖析了HMM模型，这个代码也是上述系列博客的配套代码！
+
+----
+# 修改说明
+1. 添加对Python 3的支持
+1. 整理代码格式
+1. 做了简单的Code Review, 方便理解代码
