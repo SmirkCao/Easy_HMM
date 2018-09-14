@@ -18,10 +18,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     logger = logging.getLogger(__name__)
 
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-p", "--path", required=False, help="path to input data file")
-    args = vars(ap.parse_args())
-
     # for this example
     # n_components: 3   对应三个色子
     # n_features: 1     理解一下, 这里feature和symbol是不一样的含义. symbol对应色子面的八种状态

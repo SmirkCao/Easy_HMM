@@ -15,7 +15,7 @@ class ContrastHMM():
         # 初始概率
         self.module.startprob_ = np.random.random(n_state)
         self.module.startprob_ = self.module.startprob_ / np.sum(self.module.startprob_)
-        # print(self.module.startprob)
+        # print(self.module.startprob_)
         # 转换概率
         self.module.transmat_ = np.random.random((n_state, n_state))
         self.module.transmat_ = self.module.transmat_ / np.repeat(np.sum(self.module.transmat_, 1), n_state).reshape(
@@ -25,7 +25,7 @@ class ContrastHMM():
         self.module.emissionprob_ = np.random.random(size=(n_state, n_feature))
         self.module.emissionprob_ = self.module.emissionprob_ / np.repeat(np.sum(self.module.emissionprob_, 1),
                                                                           n_feature).reshape((n_state, n_feature))
-        # print self.module.emissionprob_
+        # print(self.module.emissionprob_)
 
 
 # 计算平方误差
