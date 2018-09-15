@@ -4,7 +4,7 @@
 from sklearn.externals import joblib
 import numpy as np
 import hmm
-#todo: saving and loading HMM
+
 state_M = 4
 word_N = 0
 
