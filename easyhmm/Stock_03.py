@@ -2,18 +2,18 @@
 # By tostq <tostq216@163.com>
 # Reference to hmmlearn.examples.plot_hmm_stock_analysis.py
 # 博客: blog.csdn.net/tostq
-import numpy as np
-import pandas as pd
 from matplotlib import cm, pyplot as plt
 from matplotlib.dates import YearLocator, MonthLocator
-
 from hmm import GaussianHMM
 from sklearn.preprocessing import scale
+
+import numpy as np
+import pandas as pd
 
 
 ###############################################################################
 # 导入Yahoo金融数据
-quotes = pd.read_csv('data/yahoofinance-INTC-19950101-20040412.csv')
+quotes = pd.read_csv("../data/yahoofinance-INTC-19950101-20040412.csv")
 
 dates = quotes.index.values
 close_v = quotes[["Close"]].values.flatten()
@@ -29,7 +29,7 @@ volume = volume[1:]
 X = np.column_stack([scale(diff), scale(volume)])
 
 # 训练高斯HMM模型，这里假设隐藏状态4个
-model = GaussianHMM(4,2,20)
+model = GaussianHMM(4, 2, 20)
 model.train(X)
 
 # 预测隐状态
