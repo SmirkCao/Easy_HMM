@@ -6,7 +6,6 @@
 # Author: 😏 <smirk dot cao at gmail dot com>
 from hmmlearn import hmm
 import numpy as np
-import argparse
 import logging
 """ 
 色子问题, 包含三个小问题, 已知观测色子大小序列X
