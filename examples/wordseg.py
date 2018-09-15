@@ -102,16 +102,16 @@ if __name__ == '__main__':
 
 
     X, Z, word_dic = precess_data()
-    joblib.dump(word_dic, "wordseg_hmm_dict.pkl")
-    word_dic = joblib.load("wordseg_hmm_dict.pkl")
+    joblib.dump(word_dic, "../models/wordseg_hmm_dict.pkl")
+    word_dic = joblib.load("../models/wordseg_hmm_dict.pkl")
     logger.info("training start")
     # todo:分词效果不好, 重新看下
     wordseg_hmm = hmm.MultinomialHMM(4, len(word_dic), verbose=True, n_iter=6)
     lengths = [len(x) for x in Z]
     wordseg_hmm.fit(X.reshape(-1, 1), lengths=lengths)
     logger.info("training done")
-    joblib.dump(wordseg_hmm, "wordseg_hmm.pkl")
-    wordseg_hmm = joblib.load("wordseg_hmm.pkl")
+    joblib.dump(wordseg_hmm, "../models/wordseg_hmm.pkl")
+    wordseg_hmm = joblib.load("../models/wordseg_hmm.pkl")
     sentence_1 = "我要回家吃饭"
     sentence_2 = "中国人民从此站起来了"
     sentence_3 = "经党中央研究决定"
