@@ -88,10 +88,10 @@ wordseg_hmm.train_batch(X, Z)
 print("startprob_prior: ", wordseg_hmm.start_prob)
 print("transmit: ", wordseg_hmm.transmat_prob)
 # save model and dict
-joblib.dump(word_dic, "w_dict.pkl")
-word_dic = joblib.load("w_dict.pkl")
-joblib.dump(wordseg_hmm, "w_model.pkl")
-wordseg_hmm = joblib.load("w_model.pkl")
+joblib.dump(word_dic, "../models/w_dict.pkl")
+word_dic = joblib.load("../models/w_dict.pkl")
+joblib.dump(wordseg_hmm, "../models/w_model.pkl")
+wordseg_hmm = joblib.load("../models/w_model.pkl")
 
 sentence_1 = "我要回家吃饭"
 sentence_2 = "中国人民从此站起来了"
