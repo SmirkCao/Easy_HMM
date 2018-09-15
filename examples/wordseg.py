@@ -11,6 +11,105 @@ import numpy as np
 import argparse
 import logging
 
+
+def get_bmes(str_in):
+    """
+    获得输入字符串的BMES标记列表
+    state_list = {'B': 0, 'M': 1, 'E': 2, 'S': 3}
+    如：（我：S）、（你好：BE）、（恭喜发财：BMME）
+    :param str_in: 分词结果字符串
+    :return: BMES标记列表
+    """
+    n_in = len(str_in)
+    if n_in == 0:
+        rst = []
+    elif n_in == 1:
+        rst = [3]
+    else:
+        rst = [0] + [1] * (n_in - 2) + [2]
+    return rst
+
+
+def precess_data(path):
+    """
+
+    语料：RenMinData.txt_utf8
+    语料为预先分好词的数据, 空格分隔
+    １９８６年 ，
+    十亿 中华 儿女 踏上 新 的 征 程 。
+    过去 的 一 年 ，
+    是 全国 各族 人民 在 中国 共产党 领导 下 ，
+    在 建设 有 中国 特色 的 社会主义 道路 上 ，
+    坚持 改革 、 开放 ，
+    团结 奋斗 、 胜利 前进 的 一 年 。
+
+    :param path:
+    :return:
+    lines
+    state_seq
+    word_dic
+    """
+    ifp = open(path)
+    line_num = 0
+
+    word_dic = {}
+    word_ind = 0
+
+    line_seq = []
+    state_seq = []
+
+    # 保存句子的字序列及每个字的状态序列，并完成字典统计
+    for line in ifp:
+        line_num += 1
+        if line_num % 10000 == 0:
+            print(line_num)
+
+        line = line.strip()
+        if not line:
+            continue
+        # line = line.decode("utf-8","ignore")
+
+        word_list = []
+        for i in range(len(line)):
+            if line[i] == " ":
+                continue
+            word_list.append(line[i])
+            # 建立单词表
+            if not word_dic.__contains__(line[i]):
+                word_dic[line[i]] = word_ind
+                word_ind += 1
+        line_seq.append(word_list)
+
+        lineArr = line.split(" ")
+        line_state = []
+        for item in lineArr:
+            line_state += get_bmes(item)
+        state_seq.append(np.array(line_state))
+        # if line_num > 100:
+        #     break
+    ifp.close()
+
+    lines = []
+    [lines.extend(x) for x in line_seq]
+    lines = np.array([word_dic[x] for x in lines])
+    return lines, state_seq, word_dic
+
+
+def word_trans(wordline, word_dic):
+    """
+    将句子转换成字典序号序列
+    :param wordline:
+    :param word_dic:
+    :return:
+    """
+    word_inc = []
+    line = wordline.strip()
+    for n in range(len(line)):
+        word_inc.append([word_dic[line[n]]])
+
+    return np.array(word_inc)
+
+
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     logger = logging.getLogger(__name__)
@@ -22,86 +121,7 @@ if __name__ == '__main__':
     state_M = 4
     word_N = 0
 
-    state_list = {'B': 0, 'M': 1, 'E': 2, 'S': 3}
-
-
-    # 获得某词的分词结果
-    # 如：（我：S）、（你好：BE）、（恭喜发财：BMME）
-    def getList(input_str):
-        outpout_str = []
-        if len(input_str) == 1:
-            outpout_str.append(3)
-        elif len(input_str) == 2:
-            outpout_str = [0, 2]
-        else:
-            M_num = len(input_str) - 2
-            M_list = [1] * M_num
-            outpout_str.append(0)
-            outpout_str.extend(M_list)
-            outpout_str.append(2)
-        return outpout_str
-
-
-    # 预处理词典：RenMinData.txt_utf8
-    def precess_data():
-        ifp = open("../data/RenMinData.txt_utf8")
-        line_num = 0
-        word_dic = {}
-        word_ind = 0
-        line_seq = []
-        state_seq = []
-        # 保存句子的字序列及每个字的状态序列，并完成字典统计
-        for line in ifp:
-            line_num += 1
-            if line_num % 10000 == 0:
-                print(line_num)
-
-            line = line.strip()
-            if not line:
-                continue
-            # line = line.decode("utf-8","ignore")
-
-            word_list = []
-            for i in range(len(line)):
-                if line[i] == " ":
-                    continue
-                word_list.append(line[i])
-                # 建立单词表
-                if not word_dic.__contains__(line[i]):
-                    word_dic[line[i]] = word_ind
-                    word_ind += 1
-            line_seq.append(word_list)
-
-            lineArr = line.split(" ")
-            line_state = []
-            for item in lineArr:
-                line_state += getList(item)
-            state_seq.append(np.array(line_state))
-            # if line_num > 100:
-            #     break
-        ifp.close()
-
-        lines = []
-        [lines.extend(x) for x in line_seq]
-        lines = np.array([word_dic[x] for x in lines])
-        # for i in range(line_num):
-        #     lines = np.vstack([lines, np.array([[word_dic[x]] for x in line_seq[i]])])
-
-        return lines, state_seq, word_dic
-
-
-    # 将句子转换成字典序号序列
-    def word_trans(wordline, word_dic):
-        word_inc = []
-        line = wordline.strip()
-        # line = line.decode("utf-8", "ignore")
-        for n in range(len(line)):
-            word_inc.append([word_dic[line[n]]])
-
-        return np.array(word_inc)
-
-
-    X, Z, word_dic = precess_data()
+    X, Z, word_dic = precess_data("../data/RenMinData.txt_utf8")
     joblib.dump(word_dic, "../models/wordseg_hmm_dict.pkl")
     word_dic = joblib.load("../models/wordseg_hmm_dict.pkl")
     logger.info("training start")
