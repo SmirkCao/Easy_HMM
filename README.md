@@ -23,11 +23,14 @@ A easy HMM program written with Python, including the full codes of training, pr
 1. 添加对Python 3的支持
 1. 整理代码格式
 1. 做了简单的[Code Review](./cr/code_review.md), 方便理解代码
-1. 重新整理了目录结构
+1. 重新整理了目录结构, 并添加了新的代码实现
+    1. cr       Code Review内容, 主要就是梳理easyhmm的代码
     1. data     保存数据, 人民日报数据和财经数据, 都是例子里面用的
     1. easyhmm  原repo里面的程序, 程序内容有更新, 可以看更新记录
-    1. examples 重新整理的部分例子实现
-    1. cr       Code Review内容, 主要就是梳理easyhmm的代码
+    1. examples 重新整理的部分例子实现, 与原项目例子对应提供了三个程序通过hmmlearn实现
+    1. models   原项目中添加了模型存储, 新示例程序也实现了模型存储, 存储位置在该目录
+    1. test     新增测试案例, 实现demo程序的时候, 设计了一些用于功能实现的测试
+    
 
 总结几点:    
 1. 这个项目比较适合入门HMM
