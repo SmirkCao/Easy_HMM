@@ -39,6 +39,9 @@ todo: 补充下问题描述
 1. 针对这个问题decode的结果和predict的结果一样.
 1. 使用hmmlearn注意X的构建.
 1. 代码的最后付了一段不同长度的sample输入的例子, 对应回答了在hmmlearn上的一个issue #154.
+### 分词
+
+### 股票
 
 
 

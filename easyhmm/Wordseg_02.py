@@ -1,9 +1,10 @@
 # -*-coding:utf-8
 # By tostq <tostq216@163.com>
 # 博客: blog.csdn.net/tostq
+from sklearn.externals import joblib
 import numpy as np
 import hmm
-#todo: saving and loading HMM
+
 state_M = 4
 word_N = 0
 
@@ -29,7 +30,7 @@ def getList(input_str):
 
 # 预处理词典：RenMinData.txt_utf8
 def precess_data():
-    ifp = open("RenMinData.txt_utf8")
+    ifp = open("../data/RenMinData.txt_utf8")
     line_num = 0
     word_dic = {}
     word_ind = 0
@@ -86,6 +87,11 @@ wordseg_hmm.train_batch(X, Z)
 
 print("startprob_prior: ", wordseg_hmm.start_prob)
 print("transmit: ", wordseg_hmm.transmat_prob)
+# save model and dict
+joblib.dump(word_dic, "../models/w_dict.pkl")
+word_dic = joblib.load("../models/w_dict.pkl")
+joblib.dump(wordseg_hmm, "../models/w_model.pkl")
+wordseg_hmm = joblib.load("../models/w_model.pkl")
 
 sentence_1 = "我要回家吃饭"
 sentence_2 = "中国人民从此站起来了"
