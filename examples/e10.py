@@ -13,7 +13,7 @@ if __name__ == '__main__':
     logger = logging.getLogger(__name__)
 
     Q = {1: 0, 2: 1, 3: 2}
-    Q_ = dict([(item[1], item[0])for item in Q.items()])
+    Q_ = dict([(b, a) for (a, b) in Q.items()])
     V = {"red": 0, "white": 1}
     A = np.array([[0.5, 0.2, 0.3],
                   [0.3, 0.5, 0.2],
