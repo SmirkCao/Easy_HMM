@@ -104,7 +104,7 @@ print("prob of x_next: ", x_next)
 
 ## Wordseg_02.py
 
-这段代码用来实现中文分词, 语料用的是人民日报的语料, 这个语料是标注过的, 所以十个监督学习问题.
+这段代码用来实现中文分词, 语料用的是人民日报的语料, 这个语料是标注过的, 所以是个监督学习问题.
 
 ```python
 # -*-coding:utf-8
@@ -548,7 +548,7 @@ def decode(self, X, istrain=True):
     return state
 ```
 
-- 1 to k的形式和one hot有点像
+- 1 to k参考PRML从二项分布推广到多项分布的部分有描述. 和One Hot是一个形式. 如果这里用pandas的话会更简单.
 
 ```python
 # 针对于多个序列的训练问题
