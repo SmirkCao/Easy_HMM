@@ -48,7 +48,8 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument("-p", "--path", required=False, help="path to input data file")
     args = vars(ap.parse_args())
-
+    # source: https://github.com/matplotlib/mpl_finance/tree/master/examples/data
+    # 之前在matplotlib里面的数据接口已经移除, finance 独立成 mpl_finance
     quotes, X = load_data('../data/yahoofinance-INTC-19950101-20040412.csv')
     model = hmm.GaussianHMM(n_components=4)
     model.fit(X)
