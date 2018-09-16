@@ -13,6 +13,7 @@ if __name__ == '__main__':
     logger = logging.getLogger(__name__)
 
     Q = {1: 0, 2: 1, 3: 2}
+    Q_ = dict([(item[1], item[0])for item in Q.items()])
     V = {"red": 0, "white": 1}
     A = np.array([[0.5, 0.2, 0.3],
                   [0.3, 0.5, 0.2],
@@ -32,5 +33,6 @@ if __name__ == '__main__':
     prob, states = model_hmm.decode(np.array([V[x] for x in O]).reshape(-1, 1))
     score = model_hmm.score(np.array([V[x] for x in O]).reshape(-1, 1))
 
-    logger.info("prob: %s hidden states: %s score: %s" % (prob, states, score))
+    logger.info("prob: %s hidden states: %s score: %s" % (prob, [Q_[state] for state in states], score))
+    # score for e10_2, states for e10_3
     # np.log(0.13022) = --2.038529951173421
