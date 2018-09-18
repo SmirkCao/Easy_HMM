@@ -30,7 +30,7 @@ A easy HMM program written with Python, including the full codes of training, pr
     1. examples 重新整理的部分例子实现, 与原项目例子对应提供了三个程序通过hmmlearn实现
     1. models   原项目中添加了模型存储, 新示例程序也实现了模型存储, 存储位置在该目录
     1. test     新增测试案例, 实现demo程序的时候, 设计了一些用于功能实现的测试
-    
+1. 增加一个实例来自《统计机器学习》e10.2 e10.3, 这两个例子相对简单
 
 总结几点:    
 1. 这个项目比较适合入门HMM

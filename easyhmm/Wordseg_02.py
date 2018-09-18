@@ -82,7 +82,9 @@ def word_trans(wordline, word_dic):
 
 
 X, Z, word_dic = precess_data()
-wordseg_hmm = hmm.DiscreteHMM(4, len(word_dic), 5)
+# 更改训练轮数为1, 得到测试结果一样
+wordseg_hmm = hmm.DiscreteHMM(4, len(word_dic), 1)
+# 这里将隐变量作为标签传入
 wordseg_hmm.train_batch(X, Z)
 
 print("startprob_prior: ", wordseg_hmm.start_prob)
