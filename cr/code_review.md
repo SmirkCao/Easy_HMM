@@ -228,6 +228,7 @@ wordseg_hmm = hmm.DiscreteHMM(4, len(word_dic), 5)
 这里通过训练, 可以拿到转移矩阵. 以及先验.
 
 这里用的是train_batch, 有相关的推导. 训练数据不是单一的序列, 而是多个短序列.
+注意这里将分词标注的结果传递给模型训练, 本代码测试案例中, 训练1轮的结果和5轮是一样的.
 
 ```python
 wordseg_hmm.train_batch(X, Z)
